@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+	  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+	<!-- <properties resource="generatorConfig.properties" /> -->
+	<properties
+		url="file:////C:\Users\TSGL\workspace\is\src\main\resources\generator\generatorConfig.properties" />
+	<classPathEntry
+		location="C:\D\Maven\repos\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar" />
+
+
+	<!-- 生成代码的运行环境 -->
+	<context id="Tables" targetRuntime="MyBatis3Simple"
+		defaultModelType="flat">
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${jdbc.driverClassName}"
+			connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="${package.name}.${module.name}.po"
+			targetProject="is\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="false" />
+		</javaModelGenerator>
+
+		<!-- 生成的映射文件报名和位置 -->
+		<sqlMapGenerator targetPackage="mybatis.${module.name}"
+			targetProject="is\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- generate Mapper -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="${package.name}.${module.name}.mapper" targetProject="is\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<table schema="" tableName="${table.name}" enableCountByExample="true"
+			domainObjectName="${domain.object.name}" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true">
+			<!-- 忽略列，不生成bean 字段 -->
+			<!--<ignoreColumn column="create_by" domainObjectName="${domain.object.name}" 
+				/> -->
+		</table>
+	</context>
+</generatorConfiguration>
