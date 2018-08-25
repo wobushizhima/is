@@ -18,17 +18,17 @@ import java.util.Map;
  * Created by superz on 2018/8/22.
  */
 public class CodeGenerateUtils {
-    private final String AUTHOR = "Ay";
-    private final String CURRENT_DATE = "2017/05/03";
-    private final String tableName = "t_test";
-    private final String packageName = "com.evada.pm.process.manage";
-    private final String tableAnnotation = "质量问题";
-    private final String URL = "jdbc:mysql://localhost:3306/myis";
-    private final String USER = "myis";
-    private final String PASSWORD = "myis@123";
-    private final String DRIVER = "com.mysql.jdbc.Driver";
-    private final String diskPath = "D:/myCodeGen/";
-    private final String changeTableName = replaceUnderLineAndUpperCase(convertTableNameToClassName(tableName));
+    private  String AUTHOR = "Ay";
+    private  String CURRENT_DATE = "2017/05/03";
+    private  String tableName = "t_test";
+    private  String packageName = "com.evada.pm.process.manage";
+    private  String tableAnnotation = "质量问题";
+    private  String URL = "jdbc:mysql://localhost:3306/myis";
+    private  String USER = "myis";
+    private  String PASSWORD = "myis@123";
+    private  String DRIVER = "com.mysql.jdbc.Driver";
+    private  String diskPath = "D:/myCodeGen/";
+    private  String changeTableName = replaceUnderLineAndUpperCase(convertTableNameToClassName(tableName));
 
     public Connection getConnection() throws Exception{
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -229,5 +229,93 @@ public class CodeGenerateUtils {
         }
         String result = sb.toString().replaceAll("_","");
         return StringUtils.capitalize(result);
+    }
+
+    public String getAUTHOR() {
+        return AUTHOR;
+    }
+
+    public void setAUTHOR(String AUTHOR) {
+        this.AUTHOR = AUTHOR;
+    }
+
+    public String getCURRENT_DATE() {
+        return CURRENT_DATE;
+    }
+
+    public void setCURRENT_DATE(String CURRENT_DATE) {
+        this.CURRENT_DATE = CURRENT_DATE;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
+    public String getTableAnnotation() {
+        return tableAnnotation;
+    }
+
+    public void setTableAnnotation(String tableAnnotation) {
+        this.tableAnnotation = tableAnnotation;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    public String getUSER() {
+        return USER;
+    }
+
+    public void setUSER(String USER) {
+        this.USER = USER;
+    }
+
+    public String getPASSWORD() {
+        return PASSWORD;
+    }
+
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
+    }
+
+    public String getDRIVER() {
+        return DRIVER;
+    }
+
+    public void setDRIVER(String DRIVER) {
+        this.DRIVER = DRIVER;
+    }
+
+    public String getDiskPath() {
+        return diskPath;
+    }
+
+    public void setDiskPath(String diskPath) {
+        this.diskPath = diskPath;
+    }
+
+    public String getChangeTableName() {
+        return changeTableName;
+    }
+
+    public void setChangeTableName(String changeTableName) {
+        this.changeTableName = changeTableName;
     }
 }

@@ -16,7 +16,7 @@ public class FreemarkerTemplateUtils {
 
     static{
         //这里比较重要，用来指定加载模板所在的路径
-        CONFIGURATION.setTemplateLoader(new ClassTemplateLoader(com.zhima.codegen.FreemarkerTemplateUtils.class, ""));
+        CONFIGURATION.setTemplateLoader(new ClassTemplateLoader(com.zhima.codegen.FreemarkerTemplateUtils.class, "/tempalte/"));
         CONFIGURATION.setDefaultEncoding("UTF-8");
         CONFIGURATION.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         CONFIGURATION.setCacheStorage(NullCacheStorage.INSTANCE);
