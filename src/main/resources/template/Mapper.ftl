@@ -8,7 +8,7 @@
         select t.* from  ${table_name_small} t
     </sql>
 
-    <inset id="insert" parameterType="${package_name}.po.${table_name}">
+    <insert id="insert" parameterType="${package_name}.po.${table_name}">
         insert into ${table_name_small} (
     <#if model_column?exists>
         <#list model_column as model>
@@ -19,18 +19,18 @@
         values (
     <#if model_column?exists>
         <#list model_column as model>
-        ${r'#{'}${model.changeColumnName?uncap_first},jdbcType=${model.columnType}}<#if model_has_next>,</#if>
+        ${r'#{'}${model.changeColumnName?uncap_first},jdbcType=<#if model.columnType=='INT'>INTEGER<#elseif  model.columnType=='LONGTEXT'>LONGVARCHAR<#else>${model.columnType}</#if>}<#if model_has_next>,</#if>
         </#list>
     </#if>
         )
-    </inset>
+    </insert>
 
     <update id="update" parameterType="${package_name}.po.${table_name}">
         update ${table_name_small}
         <set>
     <#if model_column?exists>
          <#list model_column as model>
-         <if test="${model.changeColumnName?uncap_first} != null">  ${model.columnName?uncap_first} = ${r'#{'}${model.changeColumnName?uncap_first},jdbcType=${model.columnType}}</if>
+         <if test="${model.changeColumnName?uncap_first} != null">  ${model.columnName?uncap_first} = ${r'#{'}${model.changeColumnName?uncap_first},jdbcType=<#if model.columnType=='INT'>INTEGER<#elseif  model.columnType=='LONGTEXT'>LONGVARCHAR<#else>${model.columnType}</#if>}</if>
          </#list>
     </#if>
         </set>
@@ -55,7 +55,7 @@
         <where>
     <#if model_column?exists>
         <#list model_column as model>
-            <if test="${model.changeColumnName?uncap_first} != null"> and t.${model.columnName?uncap_first} = ${r'#{'}${model.changeColumnName?uncap_first},jdbcType=${model.columnType}}</if>
+            <if test="${model.changeColumnName?uncap_first} != null"> and t.${model.columnName?uncap_first} = ${r'#{'}${model.changeColumnName?uncap_first},jdbcType=${(model.columnType=='INT')?string('INTEGER',model.columnType)}}</if>
         </#list>
      </#if>
         </where>

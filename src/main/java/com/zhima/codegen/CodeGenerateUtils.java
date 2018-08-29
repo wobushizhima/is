@@ -18,14 +18,14 @@ import java.util.Map;
  * Created by superz on 2018/8/22.
  */
 public class CodeGenerateUtils {
-    private  String AUTHOR = "Ay";
-    private  String CURRENT_DATE = "2017/05/03";
-    private  String tableName = "t_test";
-    private  String packageName = "com.evada.pm.process.manage";
-    private  String tableAnnotation = "质量问题";
-    private  String URL = "jdbc:mysql://localhost:3306/myis";
-    private  String USER = "myis";
-    private  String PASSWORD = "myis@123";
+    private  String AUTHOR = "superz";
+    private  String CURRENT_DATE = "2018/08/27";
+    private  String tableName = "t_approval";
+    private  String packageName = "com.tangshixiong.member.approval";
+    private  String tableAnnotation = "成员属性";
+    private  String URL = "jdbc:mysql://rm-m5e105ep54w2y9i792o.mysql.rds.aliyuncs.com/tsx";
+    private  String USER = "tsxdba";
+    private  String PASSWORD = "@Tsx2017";
     private  String DRIVER = "com.mysql.jdbc.Driver";
     private  String diskPath = "D:/myCodeGen/";
     private  String changeTableName = replaceUnderLineAndUpperCase(convertTableNameToClassName(tableName));

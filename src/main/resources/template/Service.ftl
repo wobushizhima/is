@@ -1,11 +1,8 @@
 package ${package_name}.service.impl;
-import com.evada.inno.core.service.impl.BaseServiceImpl;
 import ${package_name}.po.${table_name};
 import ${package_name}.service.I${table_name}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.apache.commons.beanutils.BeanUtils;
-import com.evada.inno.core.enums.StatusEnum;
 
 /**
 * 描述：${table_annotation} 服务实现层

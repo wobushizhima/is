@@ -103,6 +103,7 @@ public class MyWindow extends JFrame implements ActionListener {
             jpackageName.setText("");
             jtableName.setText("");
             jURL.setText("");
+
             jUSER.setText("");
             jPASSWORD.setText("");
             jdiskPath.setText("");

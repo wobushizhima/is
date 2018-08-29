@@ -27,7 +27,7 @@ public class ${table_name}Controller {
     @PostMapping(value = "/findById")
     public JsonResult findById(@RequestParam(value="id") String id)throws Exception {
         JsonResult jsonResult=new JsonResult();
-        ${table_name} ${table_name?uncap_first} = ${table_name?uncap_first}Service.getById(id);
+        ${table_name} ${table_name?uncap_first} = ${table_name?uncap_first}Service.getById(Integer.valueOf(id));
         jsonResult.setData(${table_name?uncap_first});
         return jsonResult;
     }
@@ -39,7 +39,7 @@ public class ${table_name}Controller {
     @PostMapping(value = "/save")
     public JsonResult save(@RequestBody ${table_name} ${table_name?uncap_first}) throws Exception {
         JsonResult jsonResult=new JsonResult();
-        ${table_name?uncap_first}=${table_name?uncap_first}Service.save${table_name}(${table_name} ${table_name?uncap_first});
+        ${table_name?uncap_first}=${table_name?uncap_first}Service.save${table_name}(${table_name?uncap_first});
         return jsonResult;
     }
 
@@ -48,20 +48,20 @@ public class ${table_name}Controller {
     * @param id ${table_annotation}id
     */
     @PostMapping(value = "/delete")
-    public void deleteById(@RequestParam(value="id") id) throws Exception {
+    public JsonResult deleteById(@RequestParam(value="id") String id) throws Exception {
         JsonResult jsonResult=new JsonResult();
-        ${table_name?uncap_first}Service.delete${table_name}(id);
+        ${table_name?uncap_first}Service.delete${table_name}(Integer.valueOf(id));
         return jsonResult;
     }
 
     /**
     * 描述：更新${table_annotation}
-    * @param id ${table_annotation}id
+    * @param  ${table_annotation} ${table_name?uncap_first}
     */
     @PostMapping(value = "/update")
-    public ResultData update${table_name}(@RequestBody ${table_name} ${table_name?uncap_first}) throws Exception {
+    public JsonResult update${table_name}(@RequestBody ${table_name} ${table_name?uncap_first}) throws Exception {
         JsonResult jsonResult=new JsonResult();
-        ${table_name?uncap_first}Service.update${table_name}(${table_name?uncap_first}));
+        ${table_name?uncap_first}Service.update${table_name}(${table_name?uncap_first});
         return jsonResult;
     }
 

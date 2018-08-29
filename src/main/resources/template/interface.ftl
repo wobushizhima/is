@@ -17,6 +17,6 @@ public interface I${table_name}Service{
 
     void delete${table_name}(Integer id) throws Exception;
 
-    ${table_name} update${table_name}(${table_name} ${table_name?uncap_first}) throws Exception;
+    void update${table_name}(${table_name} ${table_name?uncap_first}) throws Exception;
 
 }
