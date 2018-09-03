@@ -46,6 +46,7 @@ public class MyWindow extends JFrame implements ActionListener {
     private JTextField[] jTextFields=new JTextField[]{jpackageName,jtableName,jURL,jUSER,jPASSWORD,jDRIVER,jdiskPath};
 
     public MyWindow() {
+        CodeGenerateUtils codeGenerateUtils=new CodeGenerateUtils();
         jp.setLayout(null);
         for (int i = 0; i < 7; i++) {
             jl[i].setBounds(60, 40 + 40 * i, 360, 40);
@@ -63,12 +64,12 @@ public class MyWindow extends JFrame implements ActionListener {
             jp.add(jTextFields[i]);
         }
 
-        jtableName.setText("");
-        jURL.setText("");
-        jUSER.setText("");
-        jPASSWORD.setText("");
-        jdiskPath.setText("");
-        jDRIVER.setText("");
+        jURL.setText(codeGenerateUtils.getURL());
+        jUSER.setText(codeGenerateUtils.getUSER());
+        jPASSWORD.setText(codeGenerateUtils.getPASSWORD());
+        jDRIVER.setText(codeGenerateUtils.getDRIVER());
+        jdiskPath.setText(codeGenerateUtils.getDiskPath());
+
         jpackageName.requestFocus();
 
         this.add(jp);
@@ -81,6 +82,8 @@ public class MyWindow extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent a) {
+        System.out.println("new");
+        CodeGenerateUtils codeGenerateUtils=new CodeGenerateUtils();
         if (a.getSource() == jpackageName) {
             jtableName.requestFocus();
         }
@@ -102,14 +105,25 @@ public class MyWindow extends JFrame implements ActionListener {
             // jl[2].setText("");
             jpackageName.setText("");
             jtableName.setText("");
-            jURL.setText("");
-
-            jUSER.setText("");
-            jPASSWORD.setText("");
-            jdiskPath.setText("");
-            jDRIVER.setText("");
+            jURL.setText(codeGenerateUtils.getURL());
+            jUSER.setText(codeGenerateUtils.getUSER());
+            jPASSWORD.setText(codeGenerateUtils.getPASSWORD());
+            jDRIVER.setText(codeGenerateUtils.getDRIVER());
+            jdiskPath.setText(codeGenerateUtils.getDiskPath());
             jpackageName.requestFocus();
         } else if (a.getSource() == jb[0]) {
+            codeGenerateUtils.setPackageName(jpackageName.getText());
+            codeGenerateUtils.setTableName(jtableName.getText());
+            codeGenerateUtils.setURL(jURL.getText());
+            codeGenerateUtils.setUSER(jUSER.getText());
+            codeGenerateUtils.setPASSWORD(jPASSWORD.getText());
+            codeGenerateUtils.setDRIVER(jDRIVER.getText());
+            codeGenerateUtils.setDiskPath(jdiskPath.getText());
+            try {
+                codeGenerateUtils.generate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

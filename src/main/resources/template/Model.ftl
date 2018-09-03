@@ -1,5 +1,4 @@
 package ${package_name}.model;
-import com.evada.inno.common.domain.BaseModel;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -22,6 +21,11 @@ public class ${table_name}{
 
         <#if (model.columnType?lower_case = 'int' || model.columnType?lower_case = 'integer')>
         private Integer ${model.changeColumnName?uncap_first};
+
+        </#if>
+
+        <#if (model.columnType?lower_case = 'decimal')>
+        private BigDecimal ${model.changeColumnName?uncap_first};
 
         </#if>
 
@@ -50,6 +54,17 @@ public class ${table_name}{
         }
 
         public void set${model.changeColumnName}(Integer ${model.changeColumnName?uncap_first}) {
+        this.${model.changeColumnName?uncap_first} = ${model.changeColumnName?uncap_first};
+        }
+
+        </#if>
+
+        <#if (model.columnType?lower_case = 'decimal')>
+        public BigDecimal get${model.changeColumnName}() {
+        return this.${model.changeColumnName?uncap_first};
+        }
+
+        public void set${model.changeColumnName}(BigDecimal ${model.changeColumnName?uncap_first}) {
         this.${model.changeColumnName?uncap_first} = ${model.changeColumnName?uncap_first};
         }
 

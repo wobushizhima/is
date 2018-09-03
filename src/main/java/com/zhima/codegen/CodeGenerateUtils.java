@@ -39,13 +39,14 @@ public class CodeGenerateUtils {
         return connection;
     }
 
-    public static void main(String[] args) throws Exception{
-        CodeGenerateUtils codeGenerateUtils = new CodeGenerateUtils();
-        codeGenerateUtils.generate();
-    }
+//    public static void main(String[] args) throws Exception{
+//        CodeGenerateUtils codeGenerateUtils = new CodeGenerateUtils();
+//        codeGenerateUtils.generate();
+//    }
 
     public void generate() throws Exception{
         try {
+            System.out.println(tableName);
             Connection connection = getConnection();
             DatabaseMetaData databaseMetaData = connection.getMetaData();
             ResultSet idSet=databaseMetaData.getPrimaryKeys(connection.getCatalog(),connection.getSchema(),tableName);
@@ -253,6 +254,7 @@ public class CodeGenerateUtils {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+        changeTableName = replaceUnderLineAndUpperCase(convertTableNameToClassName(tableName));
     }
 
     public String getPackageName() {
@@ -309,13 +311,5 @@ public class CodeGenerateUtils {
 
     public void setDiskPath(String diskPath) {
         this.diskPath = diskPath;
-    }
-
-    public String getChangeTableName() {
-        return changeTableName;
-    }
-
-    public void setChangeTableName(String changeTableName) {
-        this.changeTableName = changeTableName;
     }
 }
