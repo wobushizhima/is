@@ -1,5 +1,4 @@
-package ${package_name}.model;
-import javax.persistence.*;
+package ${package_name}.po;
 import java.util.Date;
 
 /**

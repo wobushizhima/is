@@ -69,7 +69,7 @@ public class MyWindow extends JFrame implements ActionListener {
         jPASSWORD.setText(codeGenerateUtils.getPASSWORD());
         jDRIVER.setText(codeGenerateUtils.getDRIVER());
         jdiskPath.setText(codeGenerateUtils.getDiskPath());
-
+        jpackageName.setText(codeGenerateUtils.getPackageName());
         jpackageName.requestFocus();
 
         this.add(jp);
@@ -103,7 +103,7 @@ public class MyWindow extends JFrame implements ActionListener {
             jdiskPath.requestFocus();
         } else if (a.getSource() == jb[1]) {
             // jl[2].setText("");
-            jpackageName.setText("");
+            jpackageName.setText(codeGenerateUtils.getPackageName());
             jtableName.setText("");
             jURL.setText(codeGenerateUtils.getURL());
             jUSER.setText(codeGenerateUtils.getUSER());
