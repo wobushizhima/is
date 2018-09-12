@@ -20,8 +20,8 @@ import java.util.Map;
 public class CodeGenerateUtils {
     private  String AUTHOR = "superz";
     private  String CURRENT_DATE = "2018/08/27";
-    private  String tableName = "t_recharge";
-    private  String packageName = "com.tangshixiong.funds.recharge";
+    private  String tableName = "t_funds";
+    private  String packageName = "com.tangshixiong.funds";
     private  String tableAnnotation = "成员属性";
     private  String URL = "jdbc:mysql://rm-m5e105ep54w2y9i792o.mysql.rds.aliyuncs.com/tsx";
     private  String USER = "tsxdba";
