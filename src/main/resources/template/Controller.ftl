@@ -20,7 +20,7 @@ public class ${table_name}Controller {
 
     /**
     * 描述：根据Id 查询
-    * @param id  ${table_annotation}id
+    * @param id  ${table_annotation}
     */
     @PostMapping(value = "/findById")
     public JsonResult findById(@RequestParam(value="id") String id)throws Exception {
@@ -32,8 +32,8 @@ public class ${table_name}Controller {
 
     /**
     * 描述:创建${table_annotation}
-    * @param ${table_name?uncap_first}  ${table_annotation}
-    */
+    * @param  ${table_annotation} ${table_name?uncap_first}
+*/
     @PostMapping(value = "/save")
     public JsonResult save(@RequestBody ${table_name} ${table_name?uncap_first}) throws Exception {
         JsonResult jsonResult=new JsonResult();
@@ -43,7 +43,7 @@ public class ${table_name}Controller {
 
     /**
     * 描述：删除${table_annotation}
-    * @param id ${table_annotation}id
+    * @param id ${table_annotation}
     */
     @PostMapping(value = "/delete")
     public JsonResult deleteById(@RequestParam(value="id") String id) throws Exception {
@@ -54,12 +54,25 @@ public class ${table_name}Controller {
 
     /**
     * 描述：更新${table_annotation}
-    * @param  ${table_annotation} ${table_name?uncap_first}
+    * @param  ${table_name?uncap_first}  ${table_annotation}
     */
     @PostMapping(value = "/update")
     public JsonResult update${table_name}(@RequestBody ${table_name} ${table_name?uncap_first}) throws Exception {
         JsonResult jsonResult=new JsonResult();
         ${table_name?uncap_first}Service.update${table_name}(${table_name?uncap_first});
+        return jsonResult;
+    }
+
+    /**
+    * 描述：查询列表
+    * @param params  ${table_annotation}
+    */
+    @PostMapping(value = "/list")
+    public JsonResult list(@RequestBody Map params)throws Exception {
+        JsonResult jsonResult=new JsonResult();
+        Page<${table_name}> pages=${table_name?uncap_first}Service.list(params);
+        PageInfo pageInfo=new PageInfo(pages);
+        josnResult.setData(pageInfo);
         return jsonResult;
     }
 

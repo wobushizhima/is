@@ -1,23 +1,30 @@
 package com.zhima;
 
-import com.zhima.kit.RedisKit;
+import com.alibaba.fastjson.JSON;
+import com.zhima.h2.MyH2Dao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class IsApplicationTests {
 
+
 	@Autowired
-	private RedisKit redisKit;
+	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	private MyH2Dao myH2Dao;
 
 	@Test
-	public void contextLoads() {
-		redisKit.set("1","1313131313");
-		System.out.println(redisKit.get("1"));
+	public void create() {
+		System.out.println(JSON.toJSONString(myH2Dao.query()));
 	}
 
 }

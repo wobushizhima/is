@@ -39,7 +39,7 @@
     <delete id="deleteById" parameterType="java.lang.Integer" >
         delete from ${table_name_small}
         <where>
-            and t.${id} = ${r'#{'}${id},jdbcType=INTEGER}
+            and ${id} = ${r'#{'}${id},jdbcType=INTEGER}
         </where>
     </delete>
 

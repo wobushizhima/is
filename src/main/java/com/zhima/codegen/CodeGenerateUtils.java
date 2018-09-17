@@ -82,9 +82,12 @@ public class CodeGenerateUtils {
     private void generateModelFile(ResultSet resultSet,String id) throws Exception{
 
         final String suffix = ".java";
-        final String path = diskPath + changeTableName + suffix;
+        final String path = diskPath + "po/"+changeTableName + suffix;
         final String templateName = "Model.ftl";
         File mapperFile = new File(path);
+        if(!mapperFile.getParentFile().exists()){
+            mapperFile.getParentFile().mkdirs();
+        }
         List<ColumnClass> columnClassList = new ArrayList<>();
         ColumnClass columnClass = null;
         resultSet.beforeFirst();
@@ -121,18 +124,24 @@ public class CodeGenerateUtils {
 
     private void generateControllerFile(ResultSet resultSet) throws Exception{
         final String suffix = "Controller.java";
-        final String path = diskPath + changeTableName + suffix;
+        final String path = diskPath + "controller/"+changeTableName + suffix;
         final String templateName = "Controller.ftl";
         File mapperFile = new File(path);
+        if(!mapperFile.getParentFile().exists()){
+            mapperFile.getParentFile().mkdirs();
+        }
         Map<String,Object> dataMap = new HashMap<>();
         generateFileByTemplate(templateName,mapperFile,dataMap);
     }
 
     private void generateServiceImplFile(ResultSet resultSet) throws Exception{
         final String suffix = "ServiceImpl.java";
-        final String path = diskPath + changeTableName + suffix;
+        final String path = diskPath + "service/"+changeTableName + suffix;
         final String templateName = "Service.ftl";
         File mapperFile = new File(path);
+        if(!mapperFile.getParentFile().exists()){
+            mapperFile.getParentFile().mkdirs();
+        }
         Map<String,Object> dataMap = new HashMap<>();
         generateFileByTemplate(templateName,mapperFile,dataMap);
     }
@@ -140,9 +149,12 @@ public class CodeGenerateUtils {
     private void generateServiceInterfaceFile(ResultSet resultSet) throws Exception{
         final String prefix = "I";
         final String suffix = "Service.java";
-        final String path = diskPath + prefix + changeTableName + suffix;
+        final String path = diskPath + "service/"+prefix + changeTableName + suffix;
         final String templateName = "interface.ftl";
         File mapperFile = new File(path);
+        if(!mapperFile.getParentFile().exists()){
+            mapperFile.getParentFile().mkdirs();
+        }
         Map<String,Object> dataMap = new HashMap<>();
         generateFileByTemplate(templateName,mapperFile,dataMap);
     }
@@ -158,9 +170,12 @@ public class CodeGenerateUtils {
 
     private void generateDaoFile(ResultSet resultSet) throws Exception{
         final String suffix = "Mapper.java";
-        final String path = diskPath + changeTableName + suffix;
+        final String path = diskPath + "mapper/"+changeTableName + suffix;
         final String templateName = "DAO.ftl";
         File mapperFile = new File(path);
+        if(!mapperFile.getParentFile().exists()){
+            mapperFile.getParentFile().mkdirs();
+        }
         Map<String,Object> dataMap = new HashMap<>();
         generateFileByTemplate(templateName,mapperFile,dataMap);
 
@@ -168,10 +183,14 @@ public class CodeGenerateUtils {
 
     private void generateMapperFile(ResultSet resultSet,String id) throws Exception{
         final String suffix = "Mapper.xml";
-        final String path = diskPath + changeTableName + suffix;
+        final String path = diskPath + convertTableNameToClassName(tableName)+"/"+changeTableName + suffix;
         final String templateName = "Mapper.ftl";
         File mapperFile = new File(path);
-        ColumnClass columnClass = null;
+
+        if(!mapperFile.getParentFile().exists()){
+            mapperFile.getParentFile().mkdirs();
+        }
+            ColumnClass columnClass = null;
         List<ColumnClass> columnClassList = new ArrayList<>();
         while(resultSet.next()){
             //id字段略过

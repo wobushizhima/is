@@ -1,5 +1,6 @@
 package com.zhima.ueditor.controller;
 
+import com.zhima.ueditor.ActionEnter;
 import com.zhima.ueditor.constant.UeditorConstant;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -7,10 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Calendar;
 
 /**
@@ -20,7 +18,23 @@ import java.util.Calendar;
 @CrossOrigin
 public class UeditorController {
 
-    @RequestMapping(value = "/ueditor")
+   // @RequestMapping(value = "/exec")
+    @RequestMapping(value = "/ueditor/exec")
+//    @ResponseBody
+    public void exec(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        System.out.println("i'm here");
+        request.setCharacterEncoding("utf-8");
+        String rootPath = request.getRealPath("/");
+        String result=new ActionEnter( request, rootPath ).exec();
+        response.setHeader("Content-Type", "application/json;charset=UTF-8");
+        PrintWriter writer=response.getWriter();
+        writer.write(result);
+        writer.flush();
+        writer.close();
+        writer=null;
+    }
+
+    //@RequestMapping(value = "/ueditor")
     @ResponseBody
     public String ueditor(HttpServletRequest request, HttpServletResponse response,String action) throws IOException {
         if(action.equals("config")){
@@ -56,6 +70,7 @@ public class UeditorController {
     @RequestMapping(value = "/imgUpdate")
     @ResponseBody
     public String imgUpdate(@RequestParam("upfile") MultipartFile file) {
+        System.out.println("upload");
         if (file.isEmpty()) {
             return "error";
         }
@@ -75,7 +90,7 @@ public class UeditorController {
             file.transferTo(dest);
             //url的值为图片的实际访问地址 这里我用了Nginx代理，访问的路径是http://localhost/xxx.png
             String config = "{\"state\": \"SUCCESS\"," +
-                    "\"url\": \"" + UeditorConstant.BASE_URL + fileName + "\"," +
+                    "\"url\": \"" + "/upload/"+fileName + "\"," +
                     "\"title\": \"" + fileName + "\"," +
                     "\"original\": \"" + fileName + "\"}";
             return config;

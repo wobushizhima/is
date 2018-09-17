@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhima.sxdx.mapper.ContentMapper">
+
+    <resultMap id="ContentResultMap" type="com.zhima.sxdx.po.Content"></resultMap>
+
+    <sql id="findSql">
+        select t.* from  t_content t
+    </sql>
+
+    <insert id="insert" parameterType="com.zhima.sxdx.po.Content">
+        insert into t_content (
+            content,
+            create_time
+        )
+        values (
+        #{content,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.zhima.sxdx.po.Content">
+        update t_content
+        <set>
+         <if test="content != null">  content = #{content,jdbcType=VARCHAR}</if>
+         <if test="createTime != null">  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer" >
+        delete from t_content
+        <where>
+            and t.id = #{id,jdbcType=INTEGER}
+        </where>
+    </delete>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="ContentResultMap">
+        <include refid="findSql"></include>
+        <where>
+            and t.id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="list" resultMap="ContentResultMap">
+        <include refid="findSql" />
+        <where>
+            <if test="content != null"> and t.content = #{content,jdbcType=VARCHAR} </if>
+            <if test="createTime != null"> and t.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+        </where>
+        order by create_time desc
+    </select>
+
+
+</mapper>

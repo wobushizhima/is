@@ -19,4 +19,6 @@ public interface I${table_name}Service{
 
     void update${table_name}(${table_name} ${table_name?uncap_first}) throws Exception;
 
+    Page<${table_name}> list(Map<String, Object> param) throws Exception;
+
 }

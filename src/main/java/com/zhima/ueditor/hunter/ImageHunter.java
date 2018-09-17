@@ -1,20 +1,16 @@
 package com.zhima.ueditor.hunter;
 
+import com.zhima.ueditor.PathFormat;
+import com.zhima.ueditor.define.*;
+import com.zhima.ueditor.upload.StorageManager;
+
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.baidu.ueditor.PathFormat;
-import com.baidu.ueditor.define.AppInfo;
-import com.baidu.ueditor.define.BaseState;
-import com.baidu.ueditor.define.MIMEType;
-import com.baidu.ueditor.define.MultiState;
-import com.baidu.ueditor.define.State;
-import com.baidu.ueditor.upload.StorageManager;
+
 
 /**
  * 图片抓取器
@@ -28,9 +24,10 @@ public class ImageHunter {
 	private String rootPath = null;
 	private List<String> allowTypes = null;
 	private long maxSize = -1;
+	private String localSavePathPrefix = null;
 	
 	private List<String> filters = null;
-	
+
 	public ImageHunter ( Map<String, Object> conf ) {
 		
 		this.filename = (String)conf.get( "filename" );
@@ -39,10 +36,11 @@ public class ImageHunter {
 		this.maxSize = (Long)conf.get( "maxSize" );
 		this.allowTypes = Arrays.asList( (String[])conf.get( "allowFiles" ) );
 		this.filters = Arrays.asList( (String[])conf.get( "filter" ) );
+		this.localSavePathPrefix = (String) conf.get("localSavePathPrefix");
 		
 	}
 	
-	public State capture ( String[] list ) {
+	public State capture (String[] list ) {
 		
 		MultiState state = new MultiState( true );
 		
@@ -87,12 +85,14 @@ public class ImageHunter {
 			}
 			
 			String savePath = this.getPath( this.savePath, this.filename, suffix );
-			String physicalPath = this.rootPath + savePath;
+			String physicalPath = this.localSavePathPrefix + savePath;
+			String path = physicalPath.substring(0, physicalPath.lastIndexOf("/"));
+			String picName = physicalPath.substring(physicalPath.lastIndexOf("/")+1, physicalPath.length());
 
-			State state = StorageManager.saveFileByInputStream( connection.getInputStream(), physicalPath );
+			State state = StorageManager.saveFileByInputStream( connection.getInputStream(), path, picName );
 			
 			if ( state.isSuccess() ) {
-				state.putInfo( "url", PathFormat.format( savePath ) );
+				state.putInfo( "url", null);
 				state.putInfo( "source", urlStr );
 			}
 			
@@ -111,15 +111,6 @@ public class ImageHunter {
 	}
 	
 	private boolean validHost ( String hostname ) {
-		try {
-			InetAddress ip = InetAddress.getByName(hostname);
-			
-			if (ip.isSiteLocalAddress()) {
-				return false;
-			}
-		} catch (UnknownHostException e) {
-			return false;
-		}
 		
 		return !filters.contains( hostname );
 		

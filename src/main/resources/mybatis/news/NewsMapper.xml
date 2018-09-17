@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhima.sxdx.mapper.NewsMapper">
+
+    <resultMap id="NewsResultMap" type="com.zhima.sxdx.po.News"></resultMap>
+
+    <sql id="findSql">
+        select t.* from  t_news t
+    </sql>
+
+    <insert id="insert" parameterType="com.zhima.sxdx.po.News">
+        insert into t_news (
+            create_time,
+            content,
+            title
+        )
+        values (
+        #{createTime,jdbcType=TIMESTAMP},
+        #{content,jdbcType=LONGVARCHAR},
+        #{title,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.zhima.sxdx.po.News">
+        update t_news
+        <set>
+         <if test="createTime != null">  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+         <if test="content != null">  content = #{content,jdbcType=LONGVARCHAR}</if>
+         <if test="title != null">  title = #{title,jdbcType=VARCHAR}</if>
+        </set>
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer" >
+        delete from t_news
+        <where>
+            and id = #{id,jdbcType=INTEGER}
+        </where>
+    </delete>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="NewsResultMap">
+        <include refid="findSql"></include>
+        <where>
+            and t.id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="list" resultMap="NewsResultMap">
+        <include refid="findSql" />
+        <where>
+            <if test="createTime != null"> and t.create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="content != null"> and t.content = #{content,jdbcType=LONGTEXT}</if>
+            <if test="title != null and title !=''"><bind name="title_" value="'%' + title + '%'"></bind> and t.title LIKE #{title_,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+
+</mapper>

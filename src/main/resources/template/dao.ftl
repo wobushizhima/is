@@ -25,5 +25,5 @@ public interface ${table_name}Mapper {
 
      Page<${table_name}> list(Map<String,Object> param);
 
-     void delete(Integer id);
+     void deleteById(Integer id);
 }
