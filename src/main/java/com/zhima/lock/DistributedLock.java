@@ -27,12 +27,12 @@ public class DistributedLock {
      */
     public  boolean tryGetDistributedLock(String lockKey, String requestId, int expireTime) {
 
-        String result = redisTemplate.execute((RedisCallback)conn->{
-        });
+//        String result = redisTemplate.execute((RedisCallback)conn->{
+//        });
 
-        if (LOCK_SUCCESS.equals(result)) {
-            return true;
-        }
+//        if (LOCK_SUCCESS.equals(result)) {
+//            return true;
+//        }
         return false;
 
     }
