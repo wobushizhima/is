@@ -26,29 +26,31 @@ public class MyWindow extends JFrame implements ActionListener {
 
     private JPanel jp = new JPanel();
     JLabel packageName = new JLabel("包名:");
+    JLabel tableAnnotation = new JLabel("注释:");
     JLabel tableName = new JLabel("数据表名:");
-    JLabel URL = new JLabel("数据库链接:");
-    JLabel USER = new JLabel("用户名:");
-    JLabel PASSWORD = new JLabel("密码:");
-    JLabel DRIVER = new JLabel("驱动:");
+    JLabel url = new JLabel("数据库链接:");
+    JLabel user = new JLabel("用户名:");
+    JLabel password = new JLabel("密码:");
+    JLabel driver = new JLabel("驱动:");
     JLabel diskPath = new JLabel("文件地址:");
-    private JLabel[] jl = new JLabel[]{packageName, tableName, URL, USER, PASSWORD, DRIVER, diskPath};
+    private JLabel[] jl = new JLabel[]{packageName,tableAnnotation, tableName, url, user, password, driver, diskPath};
     JButton login = new JButton("生成");
     JButton reset = new JButton("重置");
     private JButton[] jb = new JButton[]{login, reset};
     private JTextField jpackageName = new JTextField();
+    private JTextField jtableAnnotation = new JTextField();
     private JTextField jtableName = new JTextField();
-    private JTextField jURL = new JTextField();
-    private JTextField jUSER = new JTextField();
-    private JTextField jPASSWORD = new JTextField();
-    private JTextField jDRIVER = new JTextField();
+    private JTextField jurl = new JTextField();
+    private JTextField juser = new JTextField();
+    private JTextField jpassword = new JTextField();
+    private JTextField jdriver = new JTextField();
     private JTextField jdiskPath = new JTextField();
-    private JTextField[] jTextFields=new JTextField[]{jpackageName,jtableName,jURL,jUSER,jPASSWORD,jDRIVER,jdiskPath};
+    private JTextField[] jTextFields=new JTextField[]{jpackageName,jtableAnnotation,jtableName,jurl,juser,jpassword,jdriver,jdiskPath};
 
     public MyWindow() {
         CodeGenerateUtils codeGenerateUtils=new CodeGenerateUtils();
         jp.setLayout(null);
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             jl[i].setBounds(60, 40 + 40 * i, 360, 40);
             jp.add(jl[i]);
         }
@@ -58,16 +60,16 @@ public class MyWindow extends JFrame implements ActionListener {
             jp.add(jb[i]);
         }
 
-        for(int i=0;i<7;i++){
+        for(int i=0;i<8;i++){
             jTextFields[i].setBounds(260,40+40*i,400, 40);
             jTextFields[i].addActionListener(this);
             jp.add(jTextFields[i]);
         }
 
-        jURL.setText(codeGenerateUtils.getURL());
-        jUSER.setText(codeGenerateUtils.getUSER());
-        jPASSWORD.setText(codeGenerateUtils.getPASSWORD());
-        jDRIVER.setText(codeGenerateUtils.getDRIVER());
+        jurl.setText(codeGenerateUtils.getUrl());
+        juser.setText(codeGenerateUtils.getUser());
+        jpassword.setText(codeGenerateUtils.getPassword());
+        jdriver.setText(codeGenerateUtils.getDriver());
         jdiskPath.setText(codeGenerateUtils.getDiskPath());
         jpackageName.setText(codeGenerateUtils.getPackageName());
         jpackageName.requestFocus();
@@ -85,40 +87,44 @@ public class MyWindow extends JFrame implements ActionListener {
         System.out.println("new");
         CodeGenerateUtils codeGenerateUtils=new CodeGenerateUtils();
         if (a.getSource() == jpackageName) {
+            jtableAnnotation.requestFocus();
+        }
+        if (a.getSource() == jtableAnnotation) {
             jtableName.requestFocus();
         }
         if (a.getSource() == jtableName) {
-            jURL.requestFocus();
+            jurl.requestFocus();
         }
-        if (a.getSource() == jURL) {
-            jUSER.requestFocus();
+        if (a.getSource() == jurl) {
+            juser.requestFocus();
         }
-        if (a.getSource() == jUSER) {
-            jPASSWORD.requestFocus();
+        if (a.getSource() == juser) {
+            jpassword.requestFocus();
         }
-        if (a.getSource() == jPASSWORD) {
-            jDRIVER.requestFocus();
+        if (a.getSource() == jpassword) {
+            jdriver.requestFocus();
         }
-        if (a.getSource() == jDRIVER) {
+        if (a.getSource() == jdriver) {
             jdiskPath.requestFocus();
         } else if (a.getSource() == jb[1]) {
             // jl[2].setText("");
             jpackageName.setText(codeGenerateUtils.getPackageName());
+            jtableAnnotation.setText("");
             jtableName.setText("");
-            jURL.setText(codeGenerateUtils.getURL());
-            jUSER.setText(codeGenerateUtils.getUSER());
-            jPASSWORD.setText(codeGenerateUtils.getPASSWORD());
-            jDRIVER.setText(codeGenerateUtils.getDRIVER());
-            jdiskPath.setText(codeGenerateUtils.getDiskPath());
+            jurl.setText(codeGenerateUtils.getUrl());
+            juser.setText(codeGenerateUtils.getUser());
+            jpassword.setText(codeGenerateUtils.getPassword());
+            jdriver.setText(codeGenerateUtils.getDriver());
             jpackageName.requestFocus();
         } else if (a.getSource() == jb[0]) {
             codeGenerateUtils.setPackageName(jpackageName.getText());
             codeGenerateUtils.setTableName(jtableName.getText());
-            codeGenerateUtils.setURL(jURL.getText());
-            codeGenerateUtils.setUSER(jUSER.getText());
-            codeGenerateUtils.setPASSWORD(jPASSWORD.getText());
-            codeGenerateUtils.setDRIVER(jDRIVER.getText());
+            codeGenerateUtils.setUrl(jurl.getText());
+            codeGenerateUtils.setUser(juser.getText());
+            codeGenerateUtils.setPassword(jpassword.getText());
+            codeGenerateUtils.setDriver(jdriver.getText());
             codeGenerateUtils.setDiskPath(jdiskPath.getText());
+            codeGenerateUtils.setTableAnnotation(jtableAnnotation.getText());
             try {
                 codeGenerateUtils.generate();
             } catch (Exception e) {

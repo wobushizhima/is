@@ -1,4 +1,4 @@
-package com.zhima.kit;
+package com.zhima.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

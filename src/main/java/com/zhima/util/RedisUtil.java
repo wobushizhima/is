@@ -1,4 +1,4 @@
-package com.zhima.kit;
+package com.zhima.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * Created by superz on 2018/3/16.
  */
 @Component
-public class RedisKit {
+public class RedisUtil {
 
 
     @Autowired

@@ -1,9 +1,8 @@
 package com.zhima.wxauth.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.zhima.dto.JsonResult;
 import com.zhima.kit.RedisKit;
-import com.zhima.kit.SessionUtil;
+import com.zhima.util.SessionUtil;
 import com.zhima.wxauth.api.ApiResult;
 import com.zhima.wxauth.api.WxaUserApi;
 import com.zhima.wxauth.constant.RedisConstant;

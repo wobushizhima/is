@@ -2,9 +2,9 @@ package ${package_name}.controller;
 import ${package_name}.service.I${table_name}Service;
 import ${package_name}.po.${table_name};
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 
 /**
 * 描述：${table_annotation}控制层
@@ -72,7 +72,7 @@ public class ${table_name}Controller {
         JsonResult jsonResult=new JsonResult();
         Page<${table_name}> pages=${table_name?uncap_first}Service.list(params);
         PageInfo pageInfo=new PageInfo(pages);
-        josnResult.setData(pageInfo);
+        jsonResult.setData(pageInfo);
         return jsonResult;
     }
 

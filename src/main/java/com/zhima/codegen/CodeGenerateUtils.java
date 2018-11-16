@@ -8,25 +8,22 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
  * Created by superz on 2018/8/22.
  */
 public class CodeGenerateUtils {
-    private  String AUTHOR = "superz";
-    private  String CURRENT_DATE = "2018/08/27";
+    private  String author = "superz";
     private  String tableName = "t_funds";
     private  String packageName = "com.tangshixiong.funds";
-    private  String tableAnnotation = "成员属性";
-    private  String URL = "jdbc:mysql://rm-m5e105ep54w2y9i792o.mysql.rds.aliyuncs.com/tsx";
-    private  String USER = "tsxdba";
-    private  String PASSWORD = "@Tsx2017";
-    private  String DRIVER = "com.mysql.jdbc.Driver";
+    private  String tableAnnotation = "";
+    private  String url = "jdbc:mysql://rm-m5e105ep54w2y9i792o.mysql.rds.aliyuncs.com/tsx";
+    private  String user = "tsxdba";
+    private  String password = "@Tsx2017";
+    private  String driver = "com.mysql.jdbc.Driver";
     private  String diskPath = "D:/myCodeGen/";
     private  String changeTableName = replaceUnderLineAndUpperCase(convertTableNameToClassName(tableName));
 
@@ -34,8 +31,8 @@ public class CodeGenerateUtils {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(bos);
         dos.writeInt(1);
-        Class.forName(DRIVER);
-        Connection connection= DriverManager.getConnection(URL, USER, PASSWORD);
+        Class.forName(driver);
+        Connection connection= DriverManager.getConnection(url, user, password);
         return connection;
     }
 
@@ -218,8 +215,10 @@ public class CodeGenerateUtils {
         FileOutputStream fos = new FileOutputStream(file);
         dataMap.put("table_name_small",tableName);
         dataMap.put("table_name",changeTableName);
-        dataMap.put("author",AUTHOR);
-        dataMap.put("date",CURRENT_DATE);
+        dataMap.put("author",author);
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");
+        dataMap.put("date",sdf.format(date));
         dataMap.put("package_name",packageName);
         dataMap.put("table_annotation",tableAnnotation);
         Writer out = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"),10240);
@@ -251,21 +250,7 @@ public class CodeGenerateUtils {
         return StringUtils.capitalize(result);
     }
 
-    public String getAUTHOR() {
-        return AUTHOR;
-    }
 
-    public void setAUTHOR(String AUTHOR) {
-        this.AUTHOR = AUTHOR;
-    }
-
-    public String getCURRENT_DATE() {
-        return CURRENT_DATE;
-    }
-
-    public void setCURRENT_DATE(String CURRENT_DATE) {
-        this.CURRENT_DATE = CURRENT_DATE;
-    }
 
     public String getTableName() {
         return tableName;
@@ -292,38 +277,6 @@ public class CodeGenerateUtils {
         this.tableAnnotation = tableAnnotation;
     }
 
-    public String getURL() {
-        return URL;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
-
-    public String getUSER() {
-        return USER;
-    }
-
-    public void setUSER(String USER) {
-        this.USER = USER;
-    }
-
-    public String getPASSWORD() {
-        return PASSWORD;
-    }
-
-    public void setPASSWORD(String PASSWORD) {
-        this.PASSWORD = PASSWORD;
-    }
-
-    public String getDRIVER() {
-        return DRIVER;
-    }
-
-    public void setDRIVER(String DRIVER) {
-        this.DRIVER = DRIVER;
-    }
-
     public String getDiskPath() {
         return diskPath;
     }
@@ -331,4 +284,53 @@ public class CodeGenerateUtils {
     public void setDiskPath(String diskPath) {
         this.diskPath = diskPath;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public String getChangeTableName() {
+        return changeTableName;
+    }
+
+    public void setChangeTableName(String changeTableName) {
+        this.changeTableName = changeTableName;
+    }
+
 }
